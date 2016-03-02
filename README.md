@@ -19,12 +19,14 @@
 ├── mock (模拟数据)
 │   └── server.conf
 ├── page (页面)
-├── lib (适合直接导入的一些库文件)
-│   └── mod.js
+├── common (非组件化的文件)
+│   └── images (公用图片,比如各种icon)
+│   └── lib (库文件)
+│       └── mod.js
 ├── test (测试用例)
 └── components (组件)
     └── jquery
-    └── app (应用自己开发的组件,非从fis-components拉取的)
+    └── app (应用自己开发的组件,非从外部拉取的)
         └── my
     
 ```
