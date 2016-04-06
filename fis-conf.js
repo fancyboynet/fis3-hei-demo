@@ -1,5 +1,16 @@
-var staticRoot = '/static'; //实际静态资源根目录
-var tplRoot = '/templates'; //模版根目录
+"use strict";
+
+let config = require('./tool/config.json');
+
+let staticRoot = config.static_root; //实际静态资源根目录
+let tplRoot = config.tpl_root; //模版根目录
+
+
+//排除不需要产出的目录
+fis.set('project.ignore', fis.get('project.ignore').concat([
+    'doc/**',
+    'tool/**'
+]));
 
 fis.hook('commonjs');
 

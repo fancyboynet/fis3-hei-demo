@@ -1,0 +1,5 @@
+{
+  "static_root" : "/static",
+  "tpl_root" : "/templates",
+  "port" : 8385
+}
