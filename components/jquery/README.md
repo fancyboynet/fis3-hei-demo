@@ -1,4 +1,4 @@
-[jQuery](http://jquery.com/) — New Wave JavaScript
+[jQuery](http://jquery.com/) - New Wave JavaScript
 ==================================================
 
 Contribution Guides
@@ -14,18 +14,19 @@ In the spirit of open source software development, jQuery always encourages comm
 Environments in which to use jQuery
 --------------------------------------
 
-- [Browser support](http://jquery.com/browser-support/) differs between the master branch and the compat branch. Specifically, the master branch does not support legacy browsers such as IE8. The jQuery team continues to provide support for legacy browsers on the compat branch. Use the latest compat release if support for those browsers is required. See [browser support](http://jquery.com/browser-support/) for more info.
-- To use jQuery in Node, browser extensions, and other non-browser environments, use only master branch releases given the name "jquery" rather than "jquery-compat". The compat branch does not support these environments.
+- [Browser support](http://jquery.com/browser-support/) differs between the master (2.x) branch and the 1.x-master branch. Specifically, 2.x does not support legacy browsers such as IE6-8. The jQuery team continues to provide support for legacy browsers on the 1.x-master branch. Use the latest 1.x release if support for those browsers is required. See [browser support](http://jquery.com/browser-support/) for more info.
+- To use jQuery in Node, browser extensions, and other non-browser environments, use only **2.x** releases. 1.x does not support these environments.
 
 
 What you need to build your own jQuery
 --------------------------------------
 
-In order to build jQuery, you need to have the latest Node.js/npm and git 1.7 or later. Earlier versions might work, but are not supported.
+In order to build jQuery, you need to have Node.js/npm latest and git 1.7 or later.
+(Earlier versions might work OK, but are not tested.)
 
-For Windows, you have to download and install [git](http://git-scm.com/downloads) and [Node.js](http://nodejs.org/download/).
+For Windows you have to download and install [git](http://git-scm.com/downloads) and [Node.js](http://nodejs.org/download/).
 
-OS X users should install [Homebrew](http://brew.sh/). Once Homebrew is installed, run `brew install git` to install git,
+Mac OS users should install [Homebrew](http://mxcl.github.com/homebrew/). Once Homebrew is installed, run `brew install git` to install git,
 and `brew install node` to install Node.js.
 
 Linux/BSD users should use their appropriate package managers to install git and Node.js, or build from source
@@ -47,17 +48,17 @@ cd jquery && npm run build
 ```
 The built version of jQuery will be put in the `dist/` subdirectory, along with the minified copy and associated map file.
 
-If you want to create custom build or help with jQuery development, it would be better to install [grunt command line interface](https://github.com/gruntjs/grunt-cli) as a global package:
+If you want create custom build or help with jQuery development, it would be better to install [grunt command line interface](https://github.com/gruntjs/grunt-cli) as a global package:
 
 ```
 npm install -g grunt-cli
 ```
 Make sure you have `grunt` installed by testing:
 ```
-grunt -V
+grunt -v
 ```
 
-Now by running the `grunt` command, in the jquery directory, you can build a full version of jQuery, just like with an `npm run build` command:
+Now by running `grunt` command, in the jquery directory, you could build full version of jQuery, just like with `npm run build` command:
 ```
 grunt
 ```
@@ -82,13 +83,11 @@ Some example modules that can be excluded are:
 - **ajax/script**: The `<script>` AJAX transport only; used to retrieve scripts.
 - **ajax/jsonp**: The JSONP AJAX transport only; depends on the ajax/script transport.
 - **css**: The `.css()` method plus non-animated `.show()`, `.hide()` and `.toggle()`. Also removes **all** modules depending on css (including **effects**, **dimensions**, and **offset**).
-- **deprecated**: Methods documented as deprecated but not yet removed.
+- **deprecated**: Methods documented as deprecated but not yet removed; currently only `.andSelf()`.
 - **dimensions**: The `.width()` and `.height()` methods, including `inner-` and `outer-` variations.
 - **effects**: The `.animate()` method and its shorthands such as `.slideUp()` or `.hide("slow")`.
 - **event**: The `.on()` and `.off()` methods and all event functionality. Also removes `event/alias`.
 - **event/alias**: All event attaching/triggering shorthands like `.click()` or `.mouseover()`.
-- **event/focusin**: Cross-browser support for the focusin and focusout events.
-- **event/trigger**: The `.trigger()` and `.triggerHandler()` methods. Used by **alias** and **focusin** modules.
 - **offset**: The `.offset()`, `.position()`, `.offsetParent()`, `.scrollLeft()`, and `.scrollTop()` methods.
 - **wrap**: The `.wrap()`, `.wrapAll()`, `.wrapInner()`, and `.unwrap()` methods.
 - **core/ready**: Exclude the ready module if you place your scripts at the end of the body. Any ready callbacks bound with `jQuery()` will simply be called immediately. However, `jQuery(document).ready()` will not be a function and `.on("ready", ...)` or similar will not be triggered.
@@ -98,11 +97,9 @@ Some example modules that can be excluded are:
 
 As a special case, you may also replace Sizzle by using a special flag `grunt custom:-sizzle`.
 
-- **sizzle**: The Sizzle selector engine. When this module is excluded, it is replaced by a rudimentary selector engine based on the browser's `querySelectorAll` method that does not support jQuery selector extensions or enhanced semantics. See the [selector-native.js](https://github.com/jquery/jquery/blob/master/src/selector-native.js) file for details.
+- **sizzle**: The Sizzle selector engine. When this module is excluded, it is replaced by a rudimentary selector engine based on the browser's `querySelectorAll` method that does not support jQuery selector extensions or enhanced semantics. See the selector-native.js file for details.
 
 *Note*: Excluding Sizzle will also exclude all jQuery selector extensions (such as `effects/animatedSelector` and `css/hiddenVisibleSelectors`).
-
-*Note*: Removing Sizzle is not supported on the `compat` branch.
 
 The build process shows a message for each dependent module it excludes or includes.
 
@@ -122,13 +119,13 @@ grunt custom --amd=""
 
 #### Custom Build Examples
 
-To create a custom build, first check out the version:
+To create a custom build of the latest stable version, first check out the version:
 
 ```bash
-git pull; git checkout VERSION
+git pull; git checkout $(git describe --abbrev=0 --tags)
 ```
 
-Where VERSION is the version you want to customize. Then, make sure all Node dependencies are installed:
+Then, make sure all Node dependencies are installed:
 
 ```bash
 npm install
@@ -168,7 +165,7 @@ npm install
 Start `grunt watch` or `npm start` to auto-build jQuery as you work:
 
 ```bash
-grunt watch
+cd jquery && grunt watch
 ```
 
 
@@ -213,32 +210,32 @@ Additionally, both methods can be combined.
 Essential Git
 -------------
 
-As the source code is handled by the Git version control system, it's useful to know some features used.
+As the source code is handled by the version control system Git, it's useful to know some features used.
 
-### Cleaning ###
+### cleaning ###
 
-If you want to purge your working directory back to the status of upstream, the following commands can be used (remember everything you've worked on is gone after these):
+If you want to purge your working directory back to the status of upstream, following commands can be used (remember everything you've worked on is gone after these):
 
 ```bash
 git reset --hard upstream/master
 git clean -fdx
 ```
 
-### Rebasing ###
+### rebasing ###
 
-For feature/topic branches, you should always use the `--rebase` flag to `git pull`, or if you are usually handling many temporary "to be in a github pull request" branches, run the following to automate this:
+For feature/topic branches, you should always use the `--rebase` flag to `git pull`, or if you are usually handling many temporary "to be in a github pull request" branches, run following to automate this:
 
 ```bash
 git config branch.autosetuprebase local
 ```
 (see `man git-config` for more information)
 
-### Handling merge conflicts ###
+### handling merge conflicts ###
 
 If you're getting merge conflicts when merging, instead of editing the conflicted files manually, you can use the feature
 `git mergetool`. Even though the default tool `xxdiff` looks awful/old, it's rather useful.
 
-The following are some commands that can be used there:
+Following are some commands that can be used there:
 
 * `Ctrl + Alt + M` - automerge as much as possible
 * `b` - jump to next merge conflict
@@ -249,7 +246,7 @@ The following are some commands that can be used there:
 * `Ctrl + S` - save
 * `Ctrl + Q` - quit
 
-[QUnit](http://api.qunitjs.com) Reference
+[QUnit](http://docs.jquery.com/QUnit) Reference
 -----------------
 
 ### Test methods ###
@@ -261,7 +258,7 @@ start();
 ```
 
 
-*Note*: QUnit's eventual addition of an argument to stop/start is ignored in this test suite so that start and stop can be passed as callbacks without worrying about their parameters.
+note: QUnit's eventual addition of an argument to stop/start is ignored in this test suite so that start and stop can be passed as callbacks without worrying about their parameters
 
 ### Test assertions ###
 
@@ -274,7 +271,7 @@ deepEqual( actual, expected, [message] );
 notDeepEqual( actual, expected, [message] );
 strictEqual( actual, expected, [message] );
 notStrictEqual( actual, expected, [message] );
-throws( block, [expected], [message] );
+raises( block, [expected], [message] );
 ```
 
 
@@ -304,7 +301,7 @@ t( testName, selector, [ "array", "of", "ids" ] );
 Example:
 
 ```js
-t("Check for something", "//[a]", ["foo", "bar"]);
+t("Check for something", "//[a]", ["foo", "baar"]);
 ```
 
 
@@ -360,9 +357,9 @@ callback( jQueryFromIFrame, iFrameWindow, iFrameDocument );
 ### Load tests in an iframe (window.iframeCallback) ###
 
 Loads a given page constructing a url with fileName: `"./data/" + fileName + ".html"`
-The given callback is fired when window.iframeCallback is called by the page.
+The given callback is fired when window.iframeCallback is called by the page
 The arguments passed to the callback are the same as the
-arguments passed to window.iframeCallback, whatever that may be.
+arguments passed to window.iframeCallback, whatever that may be
 
 ```js
 testIframeWithCallback( testName, fileName, callback );

@@ -12,4 +12,4 @@ shell.rm('-rf', '../output' + config.static_root + '/*');
 shell.rm('-rf', '../output/templates/*');
 shell.exec('fis3 release prod -cd ../output');
 
-// shell.cp('-rf', '../output/' + root + '/', '../../../static/' + root + '/');
+// shell.cp('-rf', '../output/' + config.static_root + '/', '../../../static/' + config.static_root + '/');

@@ -9,10 +9,15 @@ let tplRoot = config.tpl_root; //模版根目录
 //排除不需要产出的目录
 fis.set('project.ignore', fis.get('project.ignore').concat([
     'doc/**',
-    'tool/**'
+    'tool/**',
+    'test/**'
 ]));
 
-fis.hook('commonjs');
+fis.hook('commonjs', {
+    paths: {
+        jquery: '/components/jquery/jquery.js'
+    }
+});
 
 // 所有的文件产出到 {staticRoot} 目录下
 fis.match('*', {
@@ -86,18 +91,12 @@ fis.match('::packager', {
     // npm install [-g] fis3-postpackager-loader
     // 分析 __RESOURCE_MAP__ 结构，来解决资源加载问题
     postpackager: fis.plugin('loader', {
-        resourceType: 'commonJs',
+        resourceType: 'mod',
         useInlineMap: true // 资源映射表内嵌
     })
 });
 
 //生产环境
-
-// 本地模拟数据不产出
-fis.media('prod')
-    .match(/^\/mock\/(.*)/i, {
-        release: false
-    });
 
 // optimize
 fis.media('prod')
@@ -130,13 +129,12 @@ fis.media('prod')
 
 // pack
 fis.media('prod')
-    .match('/components/jquery/jquery.js', { //常用公用组件单独合并打包
-        packTo: '/pkg/lib.js'
-    })
     // 启用打包插件，必须匹配 ::packager
     .match('::packager', {
         postpackager: fis.plugin('loader', {
-            allInOne: true
+            allInOne: {
+                ignore: '/components/jquery/jquery.js'
+            }
         }),
         packager: fis.plugin('map'),
         spriter: fis.plugin('csssprites', {

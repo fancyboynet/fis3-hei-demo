@@ -1,11 +1,21 @@
-# 基于fis3的纯静态解决方案demo
+# 基于fis3的移动端纯静态解决方案
 
 ## 准备
-   ```
-   $ npm install -g fis3
-   $ npm install
+
+    ```
+    $ npm install -g fis3
+    $ npm install
+    $ fis3 install
    
-   ```
+    ```
+   
+## 安装第三方模块时请同时写入配置文件  
+
+    ```
+    fis3 install jquery@2.1.0 --save
+    
+    ```
+   
    
 ## 构建说明
    1. 全局安装[fis3](http://fex-team.github.io/fis3/index.html) `npm install -g fis3`
@@ -51,7 +61,7 @@
 2. components 一切组件，包括模板、css、js、图片以及其他前端资源
 3. test 一些测试数据、用例
 4. common 放一些组件公用的静态资源
-5. common/lib 放置一些公共库，例如 jquery, zepto, lazyload 等
+5. common/lib 放置一些非模块化公共库，例如 mod.js 等
 6. config 配置目录，包括Redirect扩展的配置文件
 7. mock 本地模拟数据目录，只在本地开发环境时才存在
 8. tool 工具类目录，只在本地开发环境时才存在

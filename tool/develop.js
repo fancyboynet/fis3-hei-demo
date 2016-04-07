@@ -9,7 +9,9 @@ if (!shell.which('fis3')) {
     return;
 }
 
-shell.rm('-rf', '../output/*');
+if (shell.test('-d', '../output')) {
+    shell.rm('-rf', '../output/*');
+}
 shell.exec('fis3 server stop -p ' + config.port);
 shell.exec('fis3 server start --root ../output -p ' + config.port);
 shell.exec('fis3 release -wLcd ../output');
