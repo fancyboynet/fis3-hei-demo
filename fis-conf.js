@@ -83,7 +83,7 @@ fis.match('**.tpl', {
 //autoprefixer
 fis.match('**.css', {
     postprocessor: fis.plugin('autoprefixer', {
-        "browsers": ["last 2 versions", "ie 8"]
+        "browsers": ["last 2 versions"]
     })
 });
 
