@@ -1,6 +1,0 @@
-{
-  "protocol": "github",
-  "dependencies": [
-    "github:fis-components/normalize.css@3.0.3"
-  ]
-}
